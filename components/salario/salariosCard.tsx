@@ -1,5 +1,6 @@
 import React from 'react'
 import { GiMoneyStack } from "react-icons/gi";
+import {formatoMoneda} from '@/utils'
 
 export const SalariosCard = () => {
     const salarios = [
@@ -30,7 +31,7 @@ export const SalariosCard = () => {
                             {salario.detalle}
                         </p>
                         <span className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                            {salario.monto}
+                            {formatoMoneda(salario.monto)}
                         </span>
                     </div>
                 )
@@ -38,7 +39,7 @@ export const SalariosCard = () => {
             }
             < div className="border-t border-blue-gray-50 p-4 text-right" >
                 <p className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
-                    <strong className="text-green-500">{totalSalarios}</strong>
+                    <strong className="text-green-500">{formatoMoneda(totalSalarios)}</strong>
                 </p>
             </div >
         </div >
