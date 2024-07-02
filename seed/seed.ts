@@ -1,12 +1,12 @@
 export const salarios = [
     {
         id: 1,
-        detalle: "Salario de Kim",
+        detalle: "Salario Kimberly",
         monto: 1044860.00
     },
     {
-        id: 1,
-        detalle: "Salario de micahel",
+        id: 2,
+        detalle: "Salario Michael",
         monto: 886425.15
     }
 ]

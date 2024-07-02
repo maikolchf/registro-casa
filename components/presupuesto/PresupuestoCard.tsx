@@ -5,20 +5,21 @@ import { presupuestos } from '../../seed/seed'
 const presupuesto = presupuestos;
 
 export const GridPresupuesto = () => {
-    return (        
+    return (
         presupuesto.map((item) => (
             <div className="relative flex flex-col bg-clip-border rounded-xl bg-white 
             text-gray-700 shadow-md">
                 <div className="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr
                  from-blue-600 to-blue-400 text-white shadow-blue-500/40 shadow-lg 
-                 absolute -mt-4 grid h-16 w-16 place-items-center">
+                 absolute -mt-4 grid h-9 w-9 sm:h-12 sm:w-12 place-items-center">
                     <GiPayMoney size={40} />
                 </div>
                 <div className="p-4 text-right">
                     <p className="block antialiased font-sans text-sm leading-normal font-normal 
-                    text-blue-gray-600">
+                            text-blue-gray-600 whitespace-pre-line">
                         {item.detalle}
                     </p>
+
                     <span className="block antialiased tracking-normal font-sans text-2xl 
                     font-semibold leading-snug text-blue-gray-900">
                         {formatoMoneda(item.montoAsignado)}

@@ -1,20 +1,10 @@
 import React from 'react'
 import { GiMoneyStack } from "react-icons/gi";
 import {formatoMoneda} from '@/utils'
+import { salarios } from '@/seed/seed';
 
 export const SalariosCard = () => {
-    const salarios = [
-        {
-            id: 1,
-            detalle: "Salario de Kim",
-            monto: 1044860.00
-        },
-        {
-            id: 1,
-            detalle: "Salario de micahel",
-            monto: 886425.15
-        }
-    ]
+    const listaSalarios = salarios;
 
     const totalSalarios = salarios.reduce((total, salario) => total + salario.monto, 0);
 
