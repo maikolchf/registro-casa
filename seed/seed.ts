@@ -18,6 +18,9 @@ export const presupuestos = [
         montoAsignado: 500000.00,
         montoGastoReal: 0.00,
         montoSaldo: 500000.00,
+        soloPago: true,
+        sobre: '',
+        fechaVencimiento : new Date('2025-07-10')
     },
     {
         id: 2,
@@ -25,6 +28,9 @@ export const presupuestos = [
         montoAsignado: 30000.00,
         montoGastoReal: 0.00,
         montoSaldo: 30000.00,
+        soloPago: true,
+        sobre: 'GTF',
+        fechaVencimiento : new Date('2025-07-10')
     },
     {
         id: 3,
@@ -32,6 +38,9 @@ export const presupuestos = [
         montoAsignado: 14000.00,
         montoGastoReal: 0.00,
         montoSaldo: 14000.00,
+        soloPago: true,
+        sobre: 'GTF',
+        fechaVencimiento : new Date('2025-07-10')
     },
     {
         id: 4,
@@ -39,6 +48,9 @@ export const presupuestos = [
         montoAsignado: 7708.27,
         montoGastoReal: 0.00,
         montoSaldo: 7708.27,
+        soloPago: true,
+        sobre: '',
+        fechaVencimiento : new Date('2025-07-10')
     },
     {
         id: 5,
@@ -46,6 +58,9 @@ export const presupuestos = [
         montoAsignado: 7708.27,
         montoGastoReal: 0.00,
         montoSaldo: 7708.27,
+        soloPago: true,
+        sobre: '',
+        fechaVencimiento : new Date('2025-07-10')
     },
     {
         id: 6,
@@ -53,6 +68,9 @@ export const presupuestos = [
         montoAsignado: 300000.00,
         montoGastoReal: 0.00,
         montoSaldo: 300000.00,
+        soloPago: false,
+        sobre: 'COMCASA',
+        fechaVencimiento : new Date('2025-07-10')
     },
     {
         id: 7,
@@ -60,6 +78,9 @@ export const presupuestos = [
         montoAsignado: 30000.00,
         montoGastoReal: 0.00,
         montoSaldo: 30000.00,
+        soloPago: true,
+        sobre: 'GTF',
+        fechaVencimiento : new Date('2025-07-10')
     },
     {
         id: 8,
@@ -67,6 +88,9 @@ export const presupuestos = [
         montoAsignado: 30000.00,
         montoGastoReal: 0.00,
         montoSaldo: 30000.00,
+        soloPago: true,
+        sobre: 'GTF',
+        fechaVencimiento : new Date('2025-07-10')
     },
     {
         id: 9,
@@ -74,6 +98,9 @@ export const presupuestos = [
         montoAsignado: 238427.62,
         montoGastoReal: 0.00,
         montoSaldo: 238427.62,
+        soloPago: true,
+        sobre: 'YITA',
+        fechaVencimiento : new Date('2025-07-10')
     },
     {
         id: 10,
@@ -81,6 +108,9 @@ export const presupuestos = [
         montoAsignado: 50000.00,
         montoGastoReal: 0.00,
         montoSaldo: 50000.00,
+        soloPago: false,
+        sobre: 'CYS',
+        fechaVencimiento : new Date('2025-07-10')
     },
     {
         id: 11,
@@ -88,6 +118,9 @@ export const presupuestos = [
         montoAsignado: 50000.00,
         montoGastoReal: 0.00,
         montoSaldo: 50000.00,
+        soloPago: false,
+        sobre: 'CYS',
+        fechaVencimiento : new Date('2025-07-10')
     },
     {
         id: 12,
@@ -95,6 +128,9 @@ export const presupuestos = [
         montoAsignado: 220000.00,
         montoGastoReal: 0.00,
         montoSaldo: 220000.00,
+        soloPago: true,
+        sobre: 'GTF',
+        fechaVencimiento : new Date('2025-07-10')
     }
 ]
 

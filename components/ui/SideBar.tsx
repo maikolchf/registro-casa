@@ -1,6 +1,7 @@
 'use client'
 import { useAlmacenUI } from '@/almacen';
 import clsx from 'clsx';
+import Link from 'next/link';
 import React from 'react'
 import { IoHome, IoSettings } from "react-icons/io5";
 import { MdSavings } from "react-icons/md";
@@ -34,12 +35,12 @@ export const SideBar = () => {
                 <div className="m-4">
                     <ul className="mb-4 flex flex-col gap-1">
                         <li>
-                            <a aria-current="page" className="active" href="/">
+                            <Link aria-current="page" className="active" href="/">
                                 <button className="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg bg-gradient-to-tr from-blue-600 to-blue-400 text-white shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85] w-full flex items-center gap-4 px-4 capitalize" type="button">
                                     <IoHome className="w-5 h-5 text-white" />
                                     <span className="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">Inicio</span>
                                 </button>
-                            </a>
+                            </Link>
                         </li>
                         <li>
                             <a className="" href="#">
@@ -50,20 +51,20 @@ export const SideBar = () => {
                             </a>
                         </li>
                         <li>
-                            <a className="" href="/salarios/">
+                            <Link className="" href="/salarios/">
                                 <button className="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize" type="button">
                                     <MdSavings className="w-5 h-5 text-white" />
                                     <p className="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">Salarios</p>
                                 </button>
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a className="" href="#">
+                            <Link className="" href="/presupuestos/">
                                 <button className="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize" type="button">
                                     <IoSettings className="w-5 h-5 text-white" />
                                     <p className="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">Mante. presupuestos</p>
                                 </button>
-                            </a>
+                            </Link>
                         </li>
                         <li>
                             <a className="" href="#">
