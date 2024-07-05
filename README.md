@@ -34,3 +34,17 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+## Prisma comandos
+npx prisma init
+npx prisma migrate dev
+
+
+## Development
+
+1. docker compose up -d
+2. renombrar .env.template por .env
+3. renombrar variables de entorno
+
+

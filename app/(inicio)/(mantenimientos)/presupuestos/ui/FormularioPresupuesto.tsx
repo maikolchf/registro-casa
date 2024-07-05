@@ -1,92 +1,163 @@
+'use client'
+
+import { InputNumerico } from "@/components"
+import { Presupuesto } from "@/interfaces"
+import clsx from "clsx"
+import { forwardRef } from "react"
+import { Controller, set, useForm } from "react-hook-form"
+import { NumericFormat } from "react-number-format"
 
 
 export const FormularioPresupuesto = () => {
+
+    const { register, handleSubmit, formState: { errors }, setValue, control } = useForm<Presupuesto>()
+
+    const GuardarDatos = async (data: Presupuesto) => {
+        console.log('data', data)
+    }
+
     return (
-        <form id="form" >
+        <form onSubmit={handleSubmit(GuardarDatos)} >
             <div className="relative z-0 w-full mb-5">
-                <label htmlFor="name">Detalle del presupuestos</label>
+                <label htmlFor="detalle">Detalle del presupuestos</label>
                 <input
                     type="text"
-                    name="name"
-                    placeholder=""
-                    required
-                    className="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                    className={clsx(
+                        "pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200",
+                        {
+                            "border-red-500": errors.detalle
+                        }
+                    )}
+                    {...register("detalle", { required: true })}
                 />
-                <span className="text-sm text-red-600 hidden" id="error">Campo requerido</span>
+                <span className={clsx(
+                    "text-sm text-red-600 ",
+                    {
+                        "hidden": !errors.detalle
+                    }
+                )} id="error">Campo requerido</span>
             </div>
             <div className="relative z-0 w-full mb-5">
-                <label htmlFor="name">Monto asignado</label>
-                <input
-                    type="text"
-                    name="name"
-                    placeholder=""
-                    required
-                    className="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                <label htmlFor="montoAsignado">Monto asignado</label>
+                <Controller
+                    name="montoAsignado"
+                    control={control}
+                    render={({ field }) => (
+                       <InputNumerico field={field} hayError={errors.montoAsignado} />
+                    )}
+                    rules={{ required: true }}
                 />
-                <span className="text-sm text-red-600 hidden" id="error">Campo requerido</span>
+                <span className={clsx(
+                    "text-sm text-red-600 ",
+                    {
+                        "hidden": !errors.montoAsignado
+                    }
+                )} id="error">Campo requerido</span>
+            </div>
+
+            <div className="relative z-0 w-full mb-5">
+                <label htmlFor="montoGastoReal">Monto pagado</label>
+                <input
+                    type="number"
+                    className={clsx(
+                        "pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200",
+                        {
+                            "border-red-500": errors.montoGastoReal
+                        }
+                    )}
+                    {...register("montoGastoReal", { required: true })}
+                />
+                <span className={clsx(
+                    "text-sm text-red-600 ",
+                    {
+                        "hidden": !errors.montoGastoReal
+                    }
+                )} id="error">Campo requerido</span>
             </div>
             <div className="relative z-0 w-full mb-5">
-                <label htmlFor="name">Monto pagado</label>
+                <label htmlFor="montoSaldo">Monto sobrante</label>
                 <input
-                    type="text"
-                    name="name"
-                    placeholder=""
-                    required
-                    className="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                    type="number"
+                    className={clsx(
+                        "pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200",
+                        {
+                            "border-red-500": errors.montoSaldo
+                        }
+                    )}
+                    {...register("montoSaldo", { required: true })}
                 />
-                <span className="text-sm text-red-600 hidden" id="error">Campo requerido</span>
-            </div>
-            <div className="relative z-0 w-full mb-5">
-                <label htmlFor="name">Monto sobrante</label>
-                <input
-                    type="text"
-                    name="name"
-                    placeholder=""
-                    required
-                    className="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
-                />
-                <span className="text-sm text-red-600 hidden" id="error">Campo requerido</span>
+                <span className={clsx(
+                    "text-sm text-red-600 ",
+                    {
+                        "hidden": !errors.montoSaldo
+                    }
+                )} id="error">Campo requerido</span>
             </div>
             <div className="relative z-0 w-full mb-5">
                 <label htmlFor="name">Es solo un pago? </label>
                 <input
                     type="checkbox"
-                    name="radio"
-                    value="1"
-                    className="mr-2 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
+                    className={clsx(
+                        "mr-2 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black",
+                        {
+                            "border-red-500": errors.soloPago
+                        }
+                    )}
+                    {...register("soloPago", { required: true })}
                 />
-                <span className="text-sm text-red-600 hidden" id="error">Campo requerido</span>
+                <span className={clsx(
+                    "text-sm text-red-600 ",
+                    {
+                        "hidden": !errors.soloPago
+                    }
+                )} id="error">Campo requerido</span>
             </div>
             <div className="relative z-0 w-full mb-5">
                 <label htmlFor="name">Sobre al que pertenece</label>
                 <select
-                    name="name"
-                    className="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200">
-                    <option value=" ">Seleccione</option>
+                    className={clsx(
+                        "pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200",
+                        {
+                            "border-red-500": errors.sobre
+                        }
+                    )}
+                    {...register("sobre", { required: true })}
+                >
+                    <option value="">Seleccione</option>
                     <option value="GTF">GTF</option>
                     <option value="CYS">CYS</option>
                     <option value="YITA">YITA</option>
                     <option value="OTROS">OTROS</option>
                 </select>
 
-                <span className="text-sm text-red-600 hidden" id="error">Campo requerido</span>
+                <span className={clsx(
+                    "text-sm text-red-600 ",
+                    {
+                        "hidden": !errors.sobre
+                    }
+                )} id="error">Campo requerido</span>
             </div>
             <div className="relative z-0 w-full mb-5">
-                <label htmlFor="name">Fecha de vencimiento</label>
-                <div className="relative z-0 w-full mb-5">
-                    <input
-                        type="date"
-                        name="ssss"
-                        placeholder=" "
-                        className="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
-                    />
-                </div>
-                <span className="text-sm text-red-600 hidden" id="error">Campo requerido</span>
+                <label htmlFor="fechaVencimiento">Fecha de vencimiento</label>
+                <input
+                    type="date"
+                    className={clsx(
+                        "pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200",
+                        {
+                            "border-red-500": errors.fechaVencimiento
+                        }
+                    )}
+                    {...register("fechaVencimiento", { required: true })}
+                />
+                <span className={clsx(
+                    "text-sm text-red-600 ",
+                    {
+                        "hidden": !errors.fechaVencimiento
+                    }
+                )} id="error">Campo requerido</span>
             </div>
-            
+
             <button
-                id="button"
-                type="button"
                 className="w-full px-6 py-3 mt-3 text-lg text-white transition-all duration-150 ease-linear rounded-lg shadow outline-none bg-blue-700 hover:bg-blue-400 hover:shadow-lg focus:outline-none"
             >
                 Guardar
