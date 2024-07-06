@@ -4,7 +4,8 @@ import { GiPayMoney } from 'react-icons/gi'
 import { formatoMoneda } from '@/utils'
 import { usePresupuestoStore } from '@/almacen';
 import { Presupuesto, Respuesta } from '@/interfaces'
-import { Spinner } from '@/components';
+import { NohayDatos, Spinner } from '@/components';
+import { presupuestos } from '../../seed/seed';
 
 interface Props {
     respuesta: Respuesta<Presupuesto[]>
@@ -42,13 +43,13 @@ export const GridPresupuesto = ({ respuesta }: Props) => {
                 <Spinner />
             </div>
         </>
-    }
+    }  
 
     return (
         <div className="mb-12 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
             {
                 presupuesto.map((item) => (
-                    <div key={item.id} className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
+                    <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
                         <div className="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr
                         from-blue-600 to-blue-400 text-white shadow-blue-500/40 shadow-lg 
                         absolute -mt-4 grid h-9 w-9 sm:h-12 sm:w-12 place-items-center">
@@ -74,9 +75,10 @@ export const GridPresupuesto = ({ respuesta }: Props) => {
                                 <strong className="text-green-500">{formatoMoneda(item.montoSaldo)}</strong>
                             </p>
                         </div>
-                    </div>
+                    </div>                    
                 ))
             }
+            
         </div>
 
     )

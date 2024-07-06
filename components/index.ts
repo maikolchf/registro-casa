@@ -7,3 +7,4 @@ export * from './presupuesto/PresupuestoIndividualCard';
 export * from './formularios/InputNumerico'
 export * from './ui/ErrorDiv';
 export * from './ui/Spinner';
+export * from './ui/NohayDatos';

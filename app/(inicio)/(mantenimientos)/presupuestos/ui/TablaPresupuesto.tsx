@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Presupuesto, Respuesta } from '@/interfaces'
 import { formatoMoneda } from '@/utils'
 import { usePresupuestoStore } from '@/almacen'
-import { Spinner } from '@/components'
+import { NohayDatos, Spinner } from '@/components'
 import clsx from 'clsx'
 
 interface Props {
@@ -37,6 +37,8 @@ export const TablaPresupuesto = ({ respuesta }: Props) => {
     
     if(!cargando) return <Spinner />;
 
+    if (almacenamientoPresupuesto.getStorePresupuesto().length === 0) return <NohayDatos />;
+
     return (
         <>           
             <table className="w-full">
@@ -66,12 +68,6 @@ export const TablaPresupuesto = ({ respuesta }: Props) => {
                                 <td className="py-3 px-4"> <a href="#" className="hover:underline">Editar</a> </td>
                             </tr>
                         ))
-                    }
-                    {
-                        ok && almacenamientoPresupuesto.getStorePresupuesto().length === 0 &&
-                        <tr>
-                            <td colSpan={6} className="py-3 px-4 text-center">¡No hay datos!</td>
-                        </tr>
                     }
                     {
                         ok === false &&
