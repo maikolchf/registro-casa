@@ -1,6 +1,15 @@
+import { ObtenerPresupuesto } from "@/Acciones";
 import { GridPresupuesto, SalariosCard, CalculosCard, PresupuestoIndividualCard } from "@/components";
+import { Respuesta, Presupuesto } from "@/interfaces";
 
-export default function Home() {
+const ObtenerPresupuestos = async () => {
+  const presupuestos = await ObtenerPresupuesto("");
+  return presupuestos;
+}
+
+export default async function Home() {
+
+  const respuesta = await ObtenerPresupuestos();
   return (
     <div className="m-4">
       <div className="mt-12">
@@ -9,8 +18,8 @@ export default function Home() {
           <CalculosCard />
           <PresupuestoIndividualCard />
         </div>
-        <div className="mb-12 grid grid-cols-2 gap-y-10 gap-x-6 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-          <GridPresupuesto />
+        <div className="">
+          <GridPresupuesto respuesta={respuesta as Respuesta<Presupuesto[]>} />
         </div>
 
       </div>
