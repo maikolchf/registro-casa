@@ -5,3 +5,5 @@ export * from './salario/salariosCard';
 export * from './calculos/CalculosCard';
 export * from './presupuesto/PresupuestoIndividualCard';
 export * from './formularios/InputNumerico'
+export * from './ui/ErrorDiv';
+export * from './ui/Spinner';

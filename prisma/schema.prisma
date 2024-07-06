@@ -14,7 +14,7 @@ datasource db {
 }
 
 model Presupuesto {
-  id               String    @id @default(cuid())
+  id               String    @id @default(uuid())
   detalle          String
   montoAsignado    Float
   montoGastoReal   Float

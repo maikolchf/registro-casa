@@ -14,6 +14,7 @@ const NumericInput = forwardRef<HTMLInputElement, NumericInputProps>(({ onChange
             {...rest}
             getInputRef={ref}
             thousandSeparator={true}
+            value="0"
             prefix={'₡'}
             decimalScale={2}
             fixedDecimalScale={true}
