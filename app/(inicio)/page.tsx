@@ -1,4 +1,4 @@
-import { ObtenerPresupuesto } from "@/Acciones";
+import { ObtenerPresupuesto } from "@/acciones";
 import { GridPresupuesto, SalariosCard, CalculosCard, PresupuestoIndividualCard } from "@/components";
 import { Respuesta, Presupuesto } from "@/interfaces";
 

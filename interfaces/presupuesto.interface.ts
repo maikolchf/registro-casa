@@ -1,3 +1,5 @@
+import { Sobre } from '@/interface';
+
 export interface Presupuesto {
 
     id: string;
@@ -6,7 +8,7 @@ export interface Presupuesto {
     montoGastoReal: number,
     montoSaldo: number,
     soloPago: boolean,
-    sobre: string,
+    sobre: Sobre,
     fechaVencimiento?: Date | null
     
 }

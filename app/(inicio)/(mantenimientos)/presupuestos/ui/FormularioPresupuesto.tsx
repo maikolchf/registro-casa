@@ -1,8 +1,8 @@
 'use client'
 
-import { InsertarPresupuesto } from "@/Acciones"
+import { InsertarPresupuesto } from "@/acciones"
 import { InputNumerico } from "@/components"
-import { Presupuesto } from "@/interfaces"
+import { Presupuesto, Sobre } from "@/interfaces"
 import clsx from "clsx"
 import { useEffect, useState } from "react"
 import { Controller, useForm } from "react-hook-form"
@@ -10,13 +10,16 @@ import { ConvertirPresupuesto } from "@/utils/shared"
 import { ErrorDiv } from '@/components';
 import { usePresupuestoStore } from "@/almacen"
 
+interface Props {
+    sobres: Sobre[]
+}
 
-export const FormularioPresupuesto = () => {
+export const FormularioPresupuesto = ({ sobres }: Props) => {
 
     const { register, handleSubmit, formState: { errors }, control, reset } = useForm<Presupuesto>()
     const [mensaje, setMensaje] = useState('');
     const [ok, setOk] = useState(true)
-    const [ocultarMensaje, setOcultarMensaje] = useState(false); 
+    const [ocultarMensaje, setOcultarMensaje] = useState(false);
     const almacenamientoPresupuesto = usePresupuestoStore((state) => ({
         presupuestos: state.presupuestos,
         addPresupuesto: state.addPresupuesto
@@ -24,10 +27,10 @@ export const FormularioPresupuesto = () => {
 
     const GuardarDatos = async (data: Presupuesto) => {
 
-        const respuesta = await InsertarPresupuesto(ConvertirPresupuesto (data));
+        const respuesta = await InsertarPresupuesto(ConvertirPresupuesto(data));
         setOk(respuesta.ok);
         setMensaje(respuesta.message);
-        if(respuesta.ok) {
+        if (respuesta.ok) {
             almacenamientoPresupuesto.addPresupuesto(respuesta.data!);
             reset({
                 detalle: '',
@@ -42,22 +45,22 @@ export const FormularioPresupuesto = () => {
 
     useEffect(() => {
         if (mensaje !== '') {
-            setOcultarMensaje(true); 
+            setOcultarMensaje(true);
             const timer = setTimeout(() => {
-                setOcultarMensaje(false); 
-                setTimeout(() => setMensaje(''), 300); 
-            }, 5000); 
+                setOcultarMensaje(false);
+                setTimeout(() => setMensaje(''), 300);
+            }, 5000);
 
             return () => clearTimeout(timer);
         }
     }, [mensaje]);
 
-    
+
 
     return (
         <form onSubmit={handleSubmit(GuardarDatos)} >
             <div className="grid w-full place-items-center overflow-x-scroll rounded-lg lg:overflow-visible">
-               <ErrorDiv mensaje={mensaje} ok={ok} ocultarMensage={ocultarMensaje} />
+                <ErrorDiv mensaje={mensaje} ok={ok} ocultarMensage={ocultarMensaje} />
             </div>
             <div className="relative z-0 w-full mb-5">
                 <label htmlFor="detalle">Detalle del presupuestos</label>
@@ -80,9 +83,9 @@ export const FormularioPresupuesto = () => {
             </div>
             <div className="relative z-0 w-full mb-5">
                 <label htmlFor="montoAsignado">Monto asignado</label>
-                <Controller                    
+                <Controller
                     name="montoAsignado"
-                    control={control}                    
+                    control={control}
                     render={({ field }) => (
                         <InputNumerico field={field} hayError={errors.montoAsignado} />
                     )}
@@ -137,10 +140,11 @@ export const FormularioPresupuesto = () => {
                     {...register("sobre", { required: true })}
                 >
                     <option value="">Seleccione</option>
-                    <option value="GTF">GTF</option>
-                    <option value="CYS">CYS</option>
-                    <option value="YITA">YITA</option>
-                    <option value="OTROS">OTROS</option>
+                    {
+                        sobres.map((sobre) => (
+                            <option key={sobre.id} value={sobre.id}>{sobre.nombre}</option>
+                        ))
+                    }
                 </select>
 
                 <span className={clsx(
@@ -169,7 +173,7 @@ export const FormularioPresupuesto = () => {
                     }
                 )} id="error">Campo requerido</span>
             </div>
-            
+
             <button
                 className="w-full px-6 py-3 mt-3 text-lg text-white transition-all duration-150 ease-linear rounded-lg shadow outline-none bg-blue-700 hover:bg-blue-400 hover:shadow-lg focus:outline-none"
             >

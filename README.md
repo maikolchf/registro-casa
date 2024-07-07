@@ -43,8 +43,10 @@ npx prisma migrate dev
 
 ## Development
 
-1. docker compose up -d
-2. renombrar .env.template por .env
-3. renombrar variables de entorno
+
+1. renombrar .env.template por .env
+2. renombrar variables de entorno
+3. docker compose up -d
+4. Realiza el comando de migrar de prisma
 
 

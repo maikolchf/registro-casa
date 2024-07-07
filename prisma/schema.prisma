@@ -20,6 +20,14 @@ model Presupuesto {
   montoGastoReal   Float
   montoSaldo       Float
   soloPago         Boolean
-  sobre            String
+  sobre            Sobre     @relation(fields: [sobreId], references: [id])
+  sobreId          String
   fechaVencimiento DateTime?
+}
+
+model Sobre {
+  id          String        @id @default(uuid())
+  nombre      String
+  estado      String
+  Presupuesto Presupuesto[]
 }

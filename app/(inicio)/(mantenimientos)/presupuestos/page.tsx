@@ -1,7 +1,7 @@
 import { TablaPresupuesto } from "./ui/TablaPresupuesto";
 import { FormularioPresupuesto } from "./ui/FormularioPresupuesto";
-import { ObtenerPresupuesto } from "@/Acciones";
-import { Presupuesto, Respuesta } from "@/interfaces";
+import { ObtenerPresupuesto, ObtenerSobre } from "@/acciones";
+import { Presupuesto, Respuesta, Sobre } from "@/interfaces";
 
 const ObtenerPresupuestos = async () => {
     const presupuestos = await ObtenerPresupuesto("");
@@ -13,6 +13,7 @@ export default async function PresupuestoPage() {
 
 
     const respuesta = await ObtenerPresupuestos();
+    const sobres = await ObtenerSobre("");
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-white">
@@ -26,7 +27,7 @@ export default async function PresupuestoPage() {
                 </div>
                 <div className="p-0  m-6">
                     <div className="mx-auto max-w-2xl px-6 py-12 shadow-lg bg-white">
-                        <FormularioPresupuesto />
+                        <FormularioPresupuesto sobres={sobres.data as Sobre[] } />
                     </div>
                 </div>
             </div>

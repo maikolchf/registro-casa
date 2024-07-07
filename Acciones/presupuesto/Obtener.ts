@@ -11,6 +11,9 @@ export const ObtenerPresupuesto = async (id: string) => {
             const presupuesto = await prisma.presupuesto.findMany({
                 where: {
                     id: id
+                },
+                include: {
+                    sobre: true
                 }
             });
 
@@ -24,13 +27,16 @@ export const ObtenerPresupuesto = async (id: string) => {
         const AllPresupuestos = await prisma.presupuesto.findMany({
             orderBy: {
                 fechaVencimiento: 'asc'
+            },
+            include: {
+                sobre: true
             }
         });
 
         return {
             ok: true,
             message: "Presupuestos obtenidos correctamente",
-            data: AllPresupuestos as Presupuesto[]
+            data: AllPresupuestos
         }
 
 

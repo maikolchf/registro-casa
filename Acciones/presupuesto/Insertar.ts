@@ -5,14 +5,17 @@ import prisma from '@/lib/prisma';
 
 export const InsertarPresupuesto = async (data: Presupuesto) => {
     try {
-        console.log(data)
         const dataRespuesta = await prisma.presupuesto.create({
             data: {
                 detalle: data.detalle,
                 montoAsignado: Number.isNaN(data.montoAsignado) ? 0 : data.montoAsignado,
                 montoGastoReal: Number.isNaN(data.montoGastoReal)? 0 : data.montoGastoReal,
                 montoSaldo: Number.isNaN(data.montoAsignado) ? 0 : data.montoAsignado,
-                sobre: data.sobre,
+                sobre: {
+                    connect: {
+                        id: data.sobre
+                    }
+                },
                 soloPago: data.soloPago,
                 fechaVencimiento: data.fechaVencimiento,
             },
@@ -31,7 +34,7 @@ export const InsertarPresupuesto = async (data: Presupuesto) => {
         return {
             ok: true,
             message: "Presupuesto insertado correctamente",
-            data: dataRespuesta as Presupuesto
+            data: dataRespuesta
         }
     } catch (error: any) {
         return {
