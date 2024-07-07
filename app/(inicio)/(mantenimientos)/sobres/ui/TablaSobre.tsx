@@ -1,20 +1,19 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import { Presupuesto, Respuesta } from '@/interfaces'
-import { formatoMoneda } from '@/utils'
-import { usePresupuestoStore } from '@/almacen'
+import { Sobre, Respuesta } from '@/interfaces'
+import { useSobreStore } from '@/almacen'
 import { NohayDatos, Spinner } from '@/components'
 import clsx from 'clsx'
 
 interface Props {
-    respuesta: Respuesta<Presupuesto[]>
+    respuesta: Respuesta<Sobre[]>
 }
 
 export const TablaSobre = ({ respuesta }: Props) => {
-    const almacenamientoPresupuesto = usePresupuestoStore((state) => ({
-        getStorePresupuesto: state.getStorePresupuesto,
-        addPresupuesto: state.addPresupuesto,
-        clearPresupuesto: state.clearPresupuesto
+    const almacenamientoSobre = useSobreStore((state) => ({
+        sobres: state.sobres,
+        addSobre: state.addSobre,
+        clearSobre: state.clearSobre,
     }));
     const [mensage, setMensage] = useState('');
     const [ok, setOk] = useState(true);
@@ -24,9 +23,9 @@ export const TablaSobre = ({ respuesta }: Props) => {
         setOk(respuesta.ok);
         setMensage(respuesta.message);
         if (respuesta.ok) {
-            almacenamientoPresupuesto.clearPresupuesto();
+            almacenamientoSobre.clearSobre();
             respuesta.data!.forEach((item) => {
-                almacenamientoPresupuesto.addPresupuesto(item);
+                almacenamientoSobre.addSobre(item);
             });
         }
     }, [respuesta.ok, respuesta.message]);
@@ -37,7 +36,7 @@ export const TablaSobre = ({ respuesta }: Props) => {
     
     if(!cargando) return <Spinner />;
 
-    if (almacenamientoPresupuesto.getStorePresupuesto().length === 0) return <NohayDatos />;
+    if (almacenamientoSobre.sobres.length === 0) return <NohayDatos />;
 
     return (
         <>           
@@ -47,24 +46,22 @@ export const TablaSobre = ({ respuesta }: Props) => {
                         clsx(
                             "bg-blue-gray-100 text-gray-700",
                             {
-                                "hidden": almacenamientoPresupuesto.getStorePresupuesto().length === 0 || !ok
+                                "hidden": almacenamientoSobre.sobres.length === 0 || !ok
                             }
                         )
                     }>
-                        <th className="py-3 px-4 text-left">Detalle</th>
-                        <th className="py-3 px-4 text-left">Monto asignado</th>
-                        <th className="py-3 px-4 text-left">Monto pagado</th>
+                        <th className="py-3 px-4 text-left">Nombre</th>
+                        <th className="py-3 px-4 text-left">Estado</th>
                         <th className="py-3 px-4 text-left">Acción</th>
                     </tr>
                 </thead>
                 <tbody className="text-blue-gray-900">
                     {
                         ok &&
-                        almacenamientoPresupuesto.getStorePresupuesto().map((item) => (
+                        almacenamientoSobre.sobres.map((item) => (
                             <tr key={item.id} className="border-b border-blue-gray-200">
-                                <td className="py-3 px-4">{item.detalle}</td>
-                                <td className="py-3 px-4">{formatoMoneda(item.montoAsignado)}</td>
-                                <td className="py-3 px-4">{formatoMoneda(item.montoGastoReal)}</td>
+                                <td className="py-3 px-4">{item.nombre}</td>
+                                <td className="py-3 px-4">{item.estado === "A" ? "Activo" : "Inactivo" }</td>
                                 <td className="py-3 px-4"> <a href="#" className="hover:underline">Editar</a> </td>
                             </tr>
                         ))

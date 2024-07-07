@@ -1,14 +1,12 @@
 'use client'
 
 import { InsertarSobre } from "@/acciones"
-import { InputNumerico } from "@/components"
 import { Sobre } from "@/interfaces"
 import clsx from "clsx"
 import { useEffect, useState } from "react"
-import { Controller, useForm } from "react-hook-form"
-import { ConvertirPresupuesto } from "@/utils/shared"
+import { useForm } from "react-hook-form"
 import { ErrorDiv } from '@/components';
-import { usePresupuestoStore } from "@/almacen"
+import { useSobreStore } from "@/almacen"
 
 
 export const FormularioSobre = () => {
@@ -17,12 +15,25 @@ export const FormularioSobre = () => {
     const [mensaje, setMensaje] = useState('');
     const [ok, setOk] = useState(true)
     const [ocultarMensaje, setOcultarMensaje] = useState(false); 
+    const almacenamientoSobre = useSobreStore((state) => ({
+        presupuestos: state.sobres,
+        addPresupuesto: state.addSobre
+    }));
 
     const GuardarDatos = async (data: Sobre) => {
         const respuesta = await InsertarSobre(data);
         setOk(respuesta.ok);
         setMensaje(respuesta.message);
-        
+        if (respuesta.ok) {
+            almacenamientoSobre.addPresupuesto(respuesta.data!);
+            reset(
+                {
+                    nombre: '',
+                    estado: ''
+                }
+            );
+        }
+       
     }
 
     useEffect(() => {
